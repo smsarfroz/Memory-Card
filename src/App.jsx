@@ -1,18 +1,17 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 
 function App() {
 
   const api = ` https://pokeapi.co/api/v2/`
-  const [img, setImg] = useState('');
-  setImg(api);
-  fetch(api) 
-    .then(response => response.json())
-    .then(response => response.pokemon)
-    .then(response => console.log(response.results))
+  
+  useEffect(() => {
+    fetch(api) 
+      .then(response => response.json())
+      .then(data => console.log(data))
+  }, [])
   return (
     <>
-      <img src={img} alt="" />
     </>
   )
 }
