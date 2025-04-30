@@ -5,6 +5,8 @@ function App() {
 
   const api = ` https://pokeapi.co/api/v2/`
   const [pokemonArray, setPokemonArray] = useState([]);
+  const [score, setScore] = useState(0);
+  const [bestScore, setbestScore] = useState(0);
   useEffect(() => {
     let ignore = false; 
     const getData = async () => {
@@ -25,7 +27,8 @@ function App() {
           return {
             id: crypto.randomUUID(),
             name: pokemonName,
-            url: pokemonImageUrl
+            url: pokemonImageUrl,
+            seen: false
           }
         }))
         if (!ignore) {
@@ -41,6 +44,41 @@ function App() {
       ignore = true;
     }
   }, []);
+
+  function randomizeArray() {
+
+  }
+  function resetSeenStatus() {
+    const updatedPokemonArray = pokemonArray.map(pokemon => {
+      return {
+        ...pokemon,
+        seen: false
+      };
+    });
+    setPokemonArray(updatedPokemonArray);
+  }
+  function handleClick(seen, id) {
+    if (seen) {
+      if (score > bestScore) {
+        setbestScore(score);
+      }
+      setScore(0);
+      resetSeenStatus();
+    } else {
+      setScore((score) => score + 1);
+      const updatedPokemonArray = pokemonArray.map(pokemon => {
+        if (pokemon.id === id) {
+          return {
+            ...pokemon, 
+            seen: !pokemon.seen
+          };
+        } else {
+          return pokemon;
+        }
+      });
+      setPokemonArray(updatedPokemonArray);
+    }
+  }
   return (
     <div className='page'>
       <div className="header">
@@ -49,14 +87,14 @@ function App() {
           <p>Get points by clicking on pokemons, but don't click on the same pokemon twice!</p>
         </div>
         <div className="right">
-          <p>Score: </p>
-          <p>Best Score: </p>
+          <p>Score: {score}</p>
+          <p>Best Score: {bestScore}</p>
         </div>
       </div>
       <div className='container'>
         {pokemonArray.map((pokemon) => {
           return (  
-            <div className='pokemon' key={pokemon.id}>
+            <div className='pokemon' key={pokemon.id} onClick={() => handleClick(pokemon.seen, pokemon.id)}>
               <img src={pokemon.url} alt="" />
               <p className="name">{pokemon.name}</p>
             </div>
