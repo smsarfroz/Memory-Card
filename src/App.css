@@ -1,4 +1,40 @@
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+.container {
+    height: 100%;
+    display: grid;
+    gap: 3vw;
+    grid-template-columns: repeat(6, 1fr);
+    padding: 2vw 1vw;
+}
 .pokemon {
-    height: 200px;
-    width: 200px;
+    height: 150px;
+    width: 150px;
+    outline: 1px solid black;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(205, 153, 187);
+}
+.header {
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    justify-content: space-between;
+    align-content: space-between;
+    align-items: center;
+    padding: 2vw 1vw;
+}
+html, body {
+    /* background: rgb(212, 57, 57); */
+    background: #833AB4;
+    background: linear-gradient(90deg, rgba(131, 58, 180, 1) 0%, rgba(253, 29, 29, 1) 50%, rgba(252, 176, 69, 1) 100%);
 }
