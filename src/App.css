@@ -17,13 +17,15 @@
 .pokemon {
     height: 150px;
     width: 150px;
-    outline: 1px solid black;
-    border-radius: 6px;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: rgb(205, 153, 187);
+
+    background-color: rgba(200, 200, 200, 0.7); 
+    opacity: 0.8; 
+    border: 1px solid #ccc;
 }
 .header {
     display: grid;
